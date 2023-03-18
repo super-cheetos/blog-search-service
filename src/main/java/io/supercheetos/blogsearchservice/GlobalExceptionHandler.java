@@ -2,10 +2,14 @@ package io.supercheetos.blogsearchservice;
 
 import io.supercheetos.blogsearchservice.blogsearch.SearchException;
 import io.supercheetos.blogsearchservice.blogsearch.searcher.InvalidSearchResultException;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Path;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.stream.Collectors;
 
 @Slf4j
 @ControllerAdvice
@@ -19,6 +23,24 @@ public class GlobalExceptionHandler {
     private static final ResponseEntity<CommonDto.NoDataResponse> EXCEPTION_RESPONSE =
             ResponseEntity.internalServerError()
                     .body(new CommonDto.NoDataResponse(CommonDto.Header.UNKNOWN_ERROR));
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<CommonDto.NoDataResponse> handleConstraintViolationException(ConstraintViolationException e) {
+        var message = e.getConstraintViolations()
+                .stream()
+                .map(cv -> {
+                    var pathIter = cv.getPropertyPath().iterator();
+                    Path.Node node = pathIter.next();
+                    while (pathIter.hasNext()) {
+                        node = pathIter.next();
+                    }
+                    return node.getName() + ": " + cv.getMessage();
+                })
+                .collect(Collectors.joining(", "));
+
+        return ResponseEntity.badRequest()
+                .body(CommonDto.NoDataResponse.error(-3, message));
+    }
 
     @ExceptionHandler(InvalidSearchResultException.class)
     public ResponseEntity<CommonDto.NoDataResponse> handleInvalidSearchResultException() {

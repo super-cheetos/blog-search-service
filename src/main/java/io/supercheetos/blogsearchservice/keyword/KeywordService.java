@@ -1,9 +1,11 @@
 package io.supercheetos.blogsearchservice.keyword;
 
+import jakarta.persistence.LockModeType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,12 +28,12 @@ public class KeywordService {
     }
 
     @Transactional
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     public void increment(String keywordName) {
         log.debug("keywordName={}", keywordName);
-        if (keywordRepository.existsById(keywordName)) {
-            keywordRepository.increment(keywordName);
-        } else {
-            keywordRepository.save(new Keyword(keywordName, 1));
-        }
+        var keyword = keywordRepository.findById(keywordName)
+                .orElseGet(() -> new Keyword(keywordName, 0));
+        keyword.increment();
+        keywordRepository.save(keyword);
     }
 }

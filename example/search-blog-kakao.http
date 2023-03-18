@@ -1,0 +1,3 @@
+### Kakao 블로그 검색 (https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-blog)
+GET https://dapi.kakao.com/v2/search/blog?query=집짓기
+Authorization: KakaoAK 85dcce19a42aee743cd930539fa77148

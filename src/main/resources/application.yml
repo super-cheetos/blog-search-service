@@ -7,3 +7,22 @@ management:
     web:
       exposure:
         include: '*'
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    prometheus:
+      enabled: true
+    loggers:
+      enabled: true
+  metrics:
+    tags:
+      application: "${spring.application.name}"
+      profiles: "${spring.profiles.active}"
+
+blog-search:
+  kakao:
+    access-token: "85dcce19a42aee743cd930539fa77148"
+    base-url: "https://dapi.kakao.com"

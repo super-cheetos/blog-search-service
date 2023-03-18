@@ -20,7 +20,7 @@ public class BlogSearchService {
 
     @Transactional
     public Page<BlogDocument> search(String query, int page, int size, BlogSort sort) {
-        for (var keywordName : query.split(" ")) {
+        for (var keywordName : query.split(" +")) {
             keywordService.increment(keywordName);
         }
         return kakaoBlogSearcher.search(query, PageRequest.of(page, size), sort);

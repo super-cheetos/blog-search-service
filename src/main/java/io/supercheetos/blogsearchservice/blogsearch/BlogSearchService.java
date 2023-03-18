@@ -1,7 +1,7 @@
 package io.supercheetos.blogsearchservice.blogsearch;
 
+import io.supercheetos.blogsearchservice.CommonDto;
 import io.supercheetos.blogsearchservice.blogsearch.searcher.kakao.KakaoSearchClient;
-import io.supercheetos.blogsearchservice.common.CommonDto;
 import io.supercheetos.blogsearchservice.keyword.KeywordService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

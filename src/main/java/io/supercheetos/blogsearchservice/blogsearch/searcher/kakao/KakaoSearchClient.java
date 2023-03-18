@@ -2,11 +2,17 @@ package io.supercheetos.blogsearchservice.blogsearch.searcher.kakao;
 
 import io.supercheetos.blogsearchservice.blogsearch.BlogDto;
 import io.supercheetos.blogsearchservice.blogsearch.BlogSort;
+import io.supercheetos.blogsearchservice.blogsearch.searcher.InvalidSearchResultException;
 import io.supercheetos.blogsearchservice.blogsearch.searcher.SearchClient;
-import io.supercheetos.blogsearchservice.common.CommonDto;
+import io.supercheetos.blogsearchservice.CommonDto;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
+
+@Slf4j
 @AllArgsConstructor
 public class KakaoSearchClient implements SearchClient {
     private final RestTemplate restTemplate;
@@ -18,6 +24,19 @@ public class KakaoSearchClient implements SearchClient {
                 KakaoDto.SearchResult.class,
                 query, sort.getValue(), page, size
         );
+        if (response == null) {
+            log.warn("Response body of Kakao REST API must not be null. : query={}, page={}, size={}, sort={}", query, page, size, sort);
+            throw new InvalidSearchResultException("Response body of Kakao REST API must not be null.");
+        }
+        var meta = response.meta();
+        if (meta == null) {
+            log.warn("Kakao meta field required. : query={}, page={}, size={}, sort={}", query, page, size, sort);
+            throw new InvalidSearchResultException("Kakao meta field required.");
+        }
+        var respDocs = response.documents();
+        if (CollectionUtils.isEmpty(respDocs)) {
+            return new CommonDto.Page<>(Collections.emptyList(), page, size, sort.getValue(), meta.totalCount());
+        }
 
         var docs = response.documents()
                 .stream()
@@ -30,7 +49,6 @@ public class KakaoSearchClient implements SearchClient {
                         doc.datetime()
                 ))
                 .toList();
-        var meta = response.meta();
         return new CommonDto.Page<>(docs, page, size, sort.getValue(), meta.totalCount());
     }
 }

@@ -1,6 +1,6 @@
 package io.supercheetos.blogsearchservice.keyword;
 
-import io.supercheetos.blogsearchservice.common.CommonDto;
+import io.supercheetos.blogsearchservice.CommonDto;
 
 import java.util.List;
 

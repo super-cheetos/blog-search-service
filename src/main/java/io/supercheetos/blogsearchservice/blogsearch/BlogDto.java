@@ -1,6 +1,6 @@
 package io.supercheetos.blogsearchservice.blogsearch;
 
-import io.supercheetos.blogsearchservice.common.CommonDto;
+import io.supercheetos.blogsearchservice.CommonDto;
 
 import java.time.ZonedDateTime;
 

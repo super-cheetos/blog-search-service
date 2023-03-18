@@ -1,6 +1,10 @@
 spring:
   application:
     name: "blog-search-service"
+  jpa:
+    generate-ddl: true
+    open-in-view: false
+    show-sql: true
 
 management:
   endpoints:

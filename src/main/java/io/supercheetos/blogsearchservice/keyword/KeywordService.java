@@ -24,4 +24,14 @@ public class KeywordService {
                 .map(entity -> new Responses.Keyword(entity.getName(), entity.getCount()))
                 .toList();
     }
+
+    @Transactional
+    public void increment(String keywordName) {
+        log.debug("keywordName={}", keywordName);
+        if (keywordRepository.existsById(keywordName)) {
+            keywordRepository.increment(keywordName);
+        } else {
+            keywordRepository.save(new Keyword(keywordName, 1));
+        }
+    }
 }

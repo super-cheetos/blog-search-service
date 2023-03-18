@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -40,6 +41,12 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest()
                 .body(CommonDto.NoDataResponse.error(-3, message));
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<CommonDto.NoDataResponse> handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+        var message = String.format("Query parameter '%s' required.", e.getParameterName());
+        return ResponseEntity.badRequest().body(CommonDto.NoDataResponse.error(-3, message));
     }
 
     @ExceptionHandler(InvalidSearchResultException.class)

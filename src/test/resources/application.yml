@@ -28,6 +28,4 @@ management:
 
 blog-search:
   kakao:
-    enabled: true
-    access-token: "85dcce19a42aee743cd930539fa77148"
-    base-url: "https://dapi.kakao.com"
+    enabled: false

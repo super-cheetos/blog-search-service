@@ -1,5 +1,6 @@
 package io.supercheetos.blogsearchservice.blogsearch.searcher.kakao;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -9,9 +10,10 @@ import org.springframework.http.HttpHeaders;
 
 @Configuration
 @EnableConfigurationProperties(KakaoProperties.class)
-public class KakaoBlogSearcherConfiguration {
+@ConditionalOnProperty(name = "blog-search.kakao.enabled", havingValue = "true")
+public class KakaoSearcherConfiguration {
     @Bean
-    public KakaoSearchClient kakaoBlogSearcher(
+    public KakaoSearchClient kakaoSearchClient(
             RestTemplateBuilder builder,
             KakaoProperties props
     ) {

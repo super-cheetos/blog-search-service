@@ -18,7 +18,7 @@ import java.time.Instant;
 public class Keyword {
     @Id
     private String name;
-    
+
     @Column(name = "count", nullable = false)
     private int count;
 

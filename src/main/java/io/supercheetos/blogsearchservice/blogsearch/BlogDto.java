@@ -5,7 +5,8 @@ import io.supercheetos.blogsearchservice.CommonDto;
 import java.time.ZonedDateTime;
 
 public final class BlogDto {
-    private BlogDto() {}
+    private BlogDto() {
+    }
 
     public record Document(
             String title,

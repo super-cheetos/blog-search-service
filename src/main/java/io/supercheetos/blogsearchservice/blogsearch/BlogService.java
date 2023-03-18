@@ -1,6 +1,7 @@
 package io.supercheetos.blogsearchservice.blogsearch;
 
 import io.supercheetos.blogsearchservice.CommonDto;
+import io.supercheetos.blogsearchservice.blogsearch.searcher.SearchClient;
 import io.supercheetos.blogsearchservice.blogsearch.searcher.kakao.KakaoSearchClient;
 import io.supercheetos.blogsearchservice.keyword.KeywordService;
 import lombok.AllArgsConstructor;
@@ -11,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class BlogSearchService {
+public class BlogService {
     private final KeywordService keywordService;
-    private final KakaoSearchClient kakaoBlogSearcher;
+    private final SearchClient searchClient;
 
     @Transactional
     public CommonDto.Page<BlogDto.Document> search(String query, int page, int size, BlogSort sort) {
         for (var keywordName : query.split(" +")) {
             keywordService.increment(keywordName);
         }
-        return kakaoBlogSearcher.search(query, page, size, sort);
+        return searchClient.search(query, page, size, sort);
     }
 }

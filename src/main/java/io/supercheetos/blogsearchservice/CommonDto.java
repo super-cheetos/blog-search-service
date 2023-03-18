@@ -1,6 +1,5 @@
 package io.supercheetos.blogsearchservice;
 
-import java.util.Collections;
 import java.util.List;
 
 public class CommonDto {

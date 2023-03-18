@@ -3,21 +3,20 @@ package io.supercheetos.blogsearchservice.blogsearch;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("/v1/blog/documents")
 @Validated
-public class BlogSearchController {
-    private final BlogSearchService service;
+public class BlogController {
+    private final BlogService service;
 
     @GetMapping("/search")
     public BlogDto.SearchResponse searchBlogDocuments(

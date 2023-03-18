@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: "blog-search-service"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

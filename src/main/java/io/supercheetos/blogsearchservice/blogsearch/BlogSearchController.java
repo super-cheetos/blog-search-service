@@ -1,5 +1,6 @@
 package io.supercheetos.blogsearchservice.blogsearch;
 
+import io.supercheetos.blogsearchservice.common.CommonDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 public class BlogSearchController {
     private final BlogSearchService service;
 
-    @GetMapping
-    public Page<BlogDocument> get(@RequestParam String query, Pageable pageable) {
-        return service.search(query, pageable.getPageNumber(), pageable.getPageSize(), BlogSort.getDefault());
+    @GetMapping("/search")
+    public BlogDto.SearchResponse search(
+            @RequestParam String query,
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "ACCURACY") BlogSort sort
+    ) {
+        return BlogDto.SearchResponse.ok(service.search(query, page, size, sort));
     }
 }

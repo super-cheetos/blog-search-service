@@ -8,16 +8,16 @@ import org.springframework.http.HttpHeaders;
 
 
 @Configuration
-@EnableConfigurationProperties(KakaoBlogSearcherProperties.class)
+@EnableConfigurationProperties(KakaoProperties.class)
 public class KakaoBlogSearcherConfiguration {
     @Bean
-    public KakaoBlogSearcher kakaoBlogSearcher(
+    public KakaoSearchClient kakaoBlogSearcher(
             RestTemplateBuilder builder,
-            KakaoBlogSearcherProperties props
+            KakaoProperties props
     ) {
         var restTemplate = builder.rootUri(props.baseUrl())
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "KakaoAK " + props.accessToken())
                 .build();
-        return new KakaoBlogSearcher(restTemplate);
+        return new KakaoSearchClient(restTemplate);
     }
 }

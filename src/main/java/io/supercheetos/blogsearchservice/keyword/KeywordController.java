@@ -16,7 +16,7 @@ public class KeywordController {
     private final KeywordService service;
 
     @GetMapping("/top10")
-    public List<Responses.Keyword> getTop10() {
-        return service.findTop10();
+    public KeywordDto.Top10Response getTop10() {
+        return KeywordDto.Top10Response.ok(service.findTop10());
     }
 }

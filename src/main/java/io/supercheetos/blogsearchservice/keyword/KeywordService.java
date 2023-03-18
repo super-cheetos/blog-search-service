@@ -18,12 +18,12 @@ public class KeywordService {
     private final KeywordRepository keywordRepository;
 
     @Transactional(readOnly = true)
-    public List<Responses.Keyword> findTop10() {
+    public List<KeywordDto.Keyword> findTop10() {
         var sort = Sort.by("count").descending();
         var pageable = PageRequest.of(0, 10, sort);
         var keywords = keywordRepository.findAll(pageable);
         return keywords.stream()
-                .map(entity -> new Responses.Keyword(entity.getName(), entity.getCount()))
+                .map(entity -> new KeywordDto.Keyword(entity.getName(), entity.getCount()))
                 .toList();
     }
 

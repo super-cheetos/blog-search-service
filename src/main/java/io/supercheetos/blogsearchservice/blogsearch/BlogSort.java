@@ -3,7 +3,7 @@ package io.supercheetos.blogsearchservice.blogsearch;
 public enum BlogSort {
     ACCURACY("accuracy"), RECENCY("recency");
 
-    private String value;
+    private final String value;
 
     BlogSort(String value) {
         this.value = value;

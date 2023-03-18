@@ -1,5 +1,5 @@
 ### 블로그 글 검색
-GET http://localhost:8080/v1/blog/documents?page=1&size=5&query=프로그래밍             언어
+GET http://localhost:8080/v1/blog/documents/search?page=1&size=5&sort=RECENCY&query=프로그래밍             언어
 
 ### 키워드 Top 10 조회
 GET http://localhost:8080/v1/keywords/top10

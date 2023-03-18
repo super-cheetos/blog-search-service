@@ -19,12 +19,9 @@ public class BlogSearchService {
 
     @Transactional
     public Page<BlogDocument> search(String query, int page, int size, BlogSort sort) {
-        for (var word : query.split(" ")) {
-            log.debug("word={}", word);
-            var keyword = keywordRepository.findById(word)
-                    .orElseGet(() -> new Keyword(word, 0));
-            keyword.increment();
-            keywordRepository.save(keyword);
+        for (var keywordName : query.split(" ")) {
+            log.debug("keywordName={}", keywordName);
+            keywordRepository.increment(keywordName);
         }
         return kakaoBlogSearcher.search(query, PageRequest.of(page, size), sort);
     }

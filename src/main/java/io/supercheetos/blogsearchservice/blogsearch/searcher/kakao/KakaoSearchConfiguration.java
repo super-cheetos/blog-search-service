@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 
 
@@ -13,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 @ConditionalOnProperty(name = "blog-search.kakao.enabled", havingValue = "true")
 public class KakaoSearchConfiguration {
     @Bean
+    @Order(1)
     public KakaoSearchClient kakaoSearchClient(
             RestTemplateBuilder builder,
             KakaoProperties props

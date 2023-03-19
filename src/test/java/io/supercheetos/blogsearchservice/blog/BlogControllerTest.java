@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.ZonedDateTime;
 import java.util.Collections;
@@ -21,6 +22,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(scripts = "classpath:test-data/clean-keywords.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class BlogControllerTest {
     public static final String URL_BLOG_SEARCH = "/v1/blog/documents/search";
 
@@ -47,7 +49,7 @@ class BlogControllerTest {
     void testBlogDocumentsSearch() {
         var query = "프로그래밍";
         var docs = List.of(
-                new BlogDto.Document("title1", "contents1", "url1", "blogName1", "thumbnail1", ZonedDateTime.parse("2023-03-19T14:00:00Z"))
+                new BlogDto.Document("title1", "contents1", "url1", "blogName1", ZonedDateTime.parse("2023-03-19T14:00:00Z"))
         );
         when(searchClient.search(eq(query), anyInt(), anyInt(), any()))
                 .then(inv -> new CommonDto.Page<>(
@@ -60,7 +62,7 @@ class BlogControllerTest {
 
         var resp = testRest.getForObject(URL_BLOG_SEARCH + "?query={query}&page=5&size=1&sort=RECENCY", String.class, query);
         assertThat(resp).isEqualTo("""
-                {"header":{"isSuccessful":true,"resultCode":0,"resultMessage":""},"documents":{"contents":[{"title":"title1","contents":"contents1","url":"url1","blogName":"blogName1","thumbnail":"thumbnail1","datetime":"2023-03-19T14:00:00Z"}],"page":5,"size":1,"sort":"recency","totalCount":100}}""");
+                {"header":{"isSuccessful":true,"resultCode":0,"resultMessage":""},"documents":{"contents":[{"title":"title1","contents":"contents1","url":"url1","blogName":"blogName1","datetime":"2023-03-19T14:00:00Z"}],"page":5,"size":1,"sort":"recency","totalCount":100}}""");
     }
 
     @Test
@@ -68,7 +70,7 @@ class BlogControllerTest {
     void testBlogDocumentsSearchWithDefaultParams() {
         var query = "프로그래밍";
         var docs = List.of(
-                new BlogDto.Document("title1", "contents1", "url1", "blogName1", "thumbnail1", ZonedDateTime.parse("2023-03-19T14:00:00Z"))
+                new BlogDto.Document("title1", "contents1", "url1", "blogName1", ZonedDateTime.parse("2023-03-19T14:00:00Z"))
         );
         when(searchClient.search(eq(query), anyInt(), anyInt(), any()))
                 .then(inv -> new CommonDto.Page<>(
@@ -82,7 +84,7 @@ class BlogControllerTest {
         var resp = testRest.getForObject(URL_BLOG_SEARCH + "?query={query}", String.class, query);
 
         assertThat(resp).isEqualTo("""
-                {"header":{"isSuccessful":true,"resultCode":0,"resultMessage":""},"documents":{"contents":[{"title":"title1","contents":"contents1","url":"url1","blogName":"blogName1","thumbnail":"thumbnail1","datetime":"2023-03-19T14:00:00Z"}],"page":1,"size":10,"sort":"accuracy","totalCount":100}}""");
+                {"header":{"isSuccessful":true,"resultCode":0,"resultMessage":""},"documents":{"contents":[{"title":"title1","contents":"contents1","url":"url1","blogName":"blogName1","datetime":"2023-03-19T14:00:00Z"}],"page":1,"size":10,"sort":"accuracy","totalCount":100}}""");
     }
 
     @Test

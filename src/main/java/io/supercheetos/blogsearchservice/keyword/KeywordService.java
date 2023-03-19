@@ -30,11 +30,13 @@ public class KeywordService {
 
     @Transactional
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    public void increment(String keywordName) {
-        log.debug("keywordName={}", keywordName);
-        var keyword = keywordRepository.findById(keywordName)
-                .orElseGet(() -> new Keyword(keywordName, 0));
-        keyword.increment();
-        keywordRepository.save(keyword);
+    public void increment(String[] keywordNames) {
+        for (var keywordName : keywordNames) {
+            log.debug("keywordName={}", keywordName);
+            var keyword = keywordRepository.findById(keywordName)
+                    .orElseGet(() -> new Keyword(keywordName, 0));
+            keyword.increment();
+            keywordRepository.save(keyword);
+        }
     }
 }

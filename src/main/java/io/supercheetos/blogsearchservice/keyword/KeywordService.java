@@ -4,6 +4,7 @@ import jakarta.persistence.LockModeType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Service;
@@ -15,14 +16,14 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class KeywordService {
+    private static final Pageable TOP10 = PageRequest.of(0, 10, Sort.sort(Keyword.class).by(Keyword::getCount).descending());
+
     private final KeywordRepository keywordRepository;
 
     @Transactional(readOnly = true)
     public List<KeywordDto.Keyword> findTop10() {
-        var sort = Sort.by("count").descending();
-        var pageable = PageRequest.of(0, 10, sort);
-        var keywords = keywordRepository.findAll(pageable);
-        return keywords.stream()
+        return keywordRepository.findAll(TOP10)
+                .stream()
                 .map(entity -> new KeywordDto.Keyword(entity.getName(), entity.getCount()))
                 .toList();
     }

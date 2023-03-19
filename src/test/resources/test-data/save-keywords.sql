@@ -1,0 +1,16 @@
+INSERT INTO keyword (name, count, created_at, updated_at)
+VALUES ('hello', 1000, NOW(), NOW()),
+       ('자바', 1400, NOW(), NOW()),
+       ('컬럼', 300, NOW(), NOW()),
+       ('한글', 1300, NOW(), NOW()),
+       ('핸드폰', 600, NOW(), NOW()),
+       ('World', 1000, NOW(), NOW()),
+       ('Somewhere', 2000, NOW(), NOW()),
+       ('apple', 900, NOW(), NOW()),
+       ('영어', 1200, NOW(), NOW()),
+       ('커피', 800, NOW(), NOW()),
+       ('일본어', 1100, NOW(), NOW()),
+       ('스마트폰', 500, NOW(), NOW()),
+       ('프로그래밍', 1500, NOW(), NOW()),
+       ('Coffee', 700, NOW(), NOW()),
+       ('댕댕이', 400, NOW(), NOW());

@@ -29,3 +29,5 @@ management:
 blog-search:
   kakao:
     enabled: false
+  naver:
+    enabled: false

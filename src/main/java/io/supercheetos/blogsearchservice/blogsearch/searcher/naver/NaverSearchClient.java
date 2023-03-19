@@ -22,6 +22,7 @@ public class NaverSearchClient implements SearchClient {
 
     @Override
     public CommonDto.Page<BlogDto.Document> search(String query, int page, int size, BlogSort sort) {
+        log.debug("Called NaverSearchClient.search. : query={}, page={}, size={}, sort={}", query, page, size, sort);
         var response = restTemplate.getForObject(
                 "/v1/search/blog.json?query={query}&start={start}&display={display}&sort={sort}",
                 NaverDto.SearchResponse.class,

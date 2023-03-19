@@ -28,8 +28,10 @@ class BlogControllerTest {
 
     @Autowired
     private TestRestTemplate testRest;
-    @MockBean
+    @MockBean(name = "kakaoSearchClient")
     private SearchClient searchClient;
+    @MockBean(name = "naverSearchClient")
+    private SearchClient fallbackSearchClient;
 
     @Test
     @DisplayName("검색 결과가 없는 경우, 성공 응답하고 contents은 빈 리스트를 반환한다.")

@@ -17,8 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class KeywordControllerTest {
     @Autowired
     private TestRestTemplate testRest;
-    @MockBean
+    @MockBean(name = "kakaoSearchClient")
     private SearchClient searchClient;
+    @MockBean(name = "naverSearchClient")
+    private SearchClient fallbackSearchClient;
 
     @Test
     void testGetTop10() {

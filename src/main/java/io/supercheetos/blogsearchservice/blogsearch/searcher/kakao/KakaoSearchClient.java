@@ -19,6 +19,7 @@ public class KakaoSearchClient implements SearchClient {
 
     @Override
     public CommonDto.Page<BlogDto.Document> search(String query, int page, int size, BlogSort sort) {
+        log.debug("Called KakaoSearchClient.search. : query={}, page={}, size={}, sort={}", query, page, size, sort);
         var response = restTemplate.getForObject(
                 "/v2/search/blog?query={query}&sort={sort}&page={page}&size={size}",
                 KakaoDto.SearchResult.class,

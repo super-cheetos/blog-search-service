@@ -1,0 +1,4 @@
+### Naver 블로그 검색 (https://developers.naver.com/docs/serviceapi/search/blog/blog.md)
+GET https://openapi.naver.com/v1/search/blog.json?query=프로그래밍         언어&display=5&start=5&sort=date
+X-Naver-Client-Id: tmSzF3XCZREtNFARaU6Z
+X-Naver-Client-Secret: gFFnc5mGcb

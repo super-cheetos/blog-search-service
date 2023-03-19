@@ -28,6 +28,11 @@ management:
 
 blog-search:
   kakao:
-    enabled: true
+    enabled: false
     access-token: "85dcce19a42aee743cd930539fa77148"
     base-url: "https://dapi.kakao.com"
+  naver:
+    enabled: true
+    client-id: "tmSzF3XCZREtNFARaU6Z"
+    client-secret: "gFFnc5mGcb"
+    base-url: "https://openapi.naver.com"

@@ -11,7 +11,7 @@ import org.springframework.http.HttpHeaders;
 @Configuration
 @EnableConfigurationProperties(KakaoProperties.class)
 @ConditionalOnProperty(name = "blog-search.kakao.enabled", havingValue = "true")
-public class KakaoSearcherConfiguration {
+public class KakaoSearchConfiguration {
     @Bean
     public KakaoSearchClient kakaoSearchClient(
             RestTemplateBuilder builder,

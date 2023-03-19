@@ -13,7 +13,6 @@ public final class BlogDto {
             String contents,
             String url,
             String blogName,
-            String thumbnail,
             ZonedDateTime datetime
     ) {
     }

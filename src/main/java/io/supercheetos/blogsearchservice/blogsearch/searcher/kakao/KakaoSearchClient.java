@@ -45,7 +45,6 @@ public class KakaoSearchClient implements SearchClient {
                         doc.contents(),
                         doc.url(),
                         doc.blogname(),
-                        doc.thumbnail(),
                         doc.datetime()
                 ))
                 .toList();

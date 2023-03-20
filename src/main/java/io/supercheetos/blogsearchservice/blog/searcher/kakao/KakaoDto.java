@@ -18,11 +18,11 @@ public class KakaoDto {
 
     public record PageMeta(
             @JsonProperty("total_count")
-            int totalCount,
+            Integer totalCount,
             @JsonProperty("pageable_count")
-            int pageableCount,
+            Integer pageableCount,
             @JsonProperty("is_end")
-            boolean isEnd
+            Boolean isEnd
     ) {
     }
 

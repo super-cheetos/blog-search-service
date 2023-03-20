@@ -26,7 +26,7 @@ public class KakaoDto {
     ) {
     }
 
-    public record SearchResult(
+    public record SearchResponse(
             PageMeta meta,
             List<Document> documents
     ) {

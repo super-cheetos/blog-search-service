@@ -1,4 +1,4 @@
-package io.supercheetos.blogsearchservice.blogsearch;
+package io.supercheetos.blogsearchservice.blog;
 
 public class SearchException extends RuntimeException {
     public SearchException(String message) {

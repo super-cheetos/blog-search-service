@@ -1,7 +1,7 @@
 package io.supercheetos.blogsearchservice;
 
-import io.supercheetos.blogsearchservice.blogsearch.SearchException;
-import io.supercheetos.blogsearchservice.blogsearch.searcher.InvalidSearchResultException;
+import io.supercheetos.blogsearchservice.blog.SearchException;
+import io.supercheetos.blogsearchservice.blog.searcher.InvalidSearchResultException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
 import lombok.extern.slf4j.Slf4j;

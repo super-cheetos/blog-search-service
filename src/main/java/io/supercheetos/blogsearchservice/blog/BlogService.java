@@ -1,7 +1,7 @@
-package io.supercheetos.blogsearchservice.blogsearch;
+package io.supercheetos.blogsearchservice.blog;
 
 import io.supercheetos.blogsearchservice.CommonDto;
-import io.supercheetos.blogsearchservice.blogsearch.searcher.SearchClient;
+import io.supercheetos.blogsearchservice.blog.searcher.SearchClient;
 import io.supercheetos.blogsearchservice.keyword.KeywordQueryEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;

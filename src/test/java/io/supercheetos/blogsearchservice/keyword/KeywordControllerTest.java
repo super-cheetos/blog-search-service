@@ -1,6 +1,6 @@
 package io.supercheetos.blogsearchservice.keyword;
 
-import io.supercheetos.blogsearchservice.blogsearch.searcher.SearchClient;
+import io.supercheetos.blogsearchservice.blog.searcher.SearchClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;

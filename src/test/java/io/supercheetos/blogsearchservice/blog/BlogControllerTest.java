@@ -1,9 +1,7 @@
 package io.supercheetos.blogsearchservice.blog;
 
 import io.supercheetos.blogsearchservice.CommonDto;
-import io.supercheetos.blogsearchservice.blogsearch.BlogDto;
-import io.supercheetos.blogsearchservice.blogsearch.BlogSort;
-import io.supercheetos.blogsearchservice.blogsearch.searcher.SearchClient;
+import io.supercheetos.blogsearchservice.blog.searcher.SearchClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;

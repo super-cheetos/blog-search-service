@@ -1,4 +1,4 @@
-package io.supercheetos.blogsearchservice.blogsearch.searcher.naver;
+package io.supercheetos.blogsearchservice.blog.searcher.naver;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

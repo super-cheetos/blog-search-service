@@ -1,10 +1,10 @@
-package io.supercheetos.blogsearchservice.blogsearch.searcher.naver;
+package io.supercheetos.blogsearchservice.blog.searcher.naver;
 
 import io.supercheetos.blogsearchservice.CommonDto;
-import io.supercheetos.blogsearchservice.blogsearch.BlogDto;
-import io.supercheetos.blogsearchservice.blogsearch.BlogSort;
-import io.supercheetos.blogsearchservice.blogsearch.searcher.InvalidSearchResultException;
-import io.supercheetos.blogsearchservice.blogsearch.searcher.SearchClient;
+import io.supercheetos.blogsearchservice.blog.BlogDto;
+import io.supercheetos.blogsearchservice.blog.BlogSort;
+import io.supercheetos.blogsearchservice.blog.searcher.InvalidSearchResultException;
+import io.supercheetos.blogsearchservice.blog.searcher.SearchClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;

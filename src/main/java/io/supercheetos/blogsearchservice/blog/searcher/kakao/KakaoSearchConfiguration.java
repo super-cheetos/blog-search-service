@@ -1,4 +1,4 @@
-package io.supercheetos.blogsearchservice.blogsearch.searcher.kakao;
+package io.supercheetos.blogsearchservice.blog.searcher.kakao;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

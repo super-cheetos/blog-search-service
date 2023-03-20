@@ -1,4 +1,4 @@
-package io.supercheetos.blogsearchservice.blogsearch.searcher.naver;
+package io.supercheetos.blogsearchservice.blog.searcher.naver;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

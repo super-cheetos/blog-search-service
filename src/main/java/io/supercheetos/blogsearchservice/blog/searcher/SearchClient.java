@@ -1,8 +1,8 @@
-package io.supercheetos.blogsearchservice.blogsearch.searcher;
+package io.supercheetos.blogsearchservice.blog.searcher;
 
 import io.supercheetos.blogsearchservice.CommonDto;
-import io.supercheetos.blogsearchservice.blogsearch.BlogDto;
-import io.supercheetos.blogsearchservice.blogsearch.BlogSort;
+import io.supercheetos.blogsearchservice.blog.BlogDto;
+import io.supercheetos.blogsearchservice.blog.BlogSort;
 
 public interface SearchClient {
     /**

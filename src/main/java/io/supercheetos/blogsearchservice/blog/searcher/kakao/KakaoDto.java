@@ -1,4 +1,4 @@
-package io.supercheetos.blogsearchservice.blogsearch.searcher.kakao;
+package io.supercheetos.blogsearchservice.blog.searcher.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

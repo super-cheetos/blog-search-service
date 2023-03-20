@@ -14,9 +14,9 @@ import org.springframework.test.context.jdbc.Sql;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(scripts = "classpath:test-data/save-keywords.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(scripts = "classpath:test-data/clean-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class KeywordControllerTest {
+    private static final String URL_TOP10 = "/v1/keywords/top10";
+
     @Autowired
     private TestRestTemplate testRest;
     @MockBean(name = "kakaoSearchClient")
@@ -26,8 +26,10 @@ class KeywordControllerTest {
 
     @Test
     @DisplayName("가장 많이 검색된 키워드 Top10을 반환한다.")
+    @Sql(scripts = "classpath:test-data/save-keywords.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "classpath:test-data/clean-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void testGetTop10() throws Exception {
-        var resp = testRest.getForEntity("/v1/keywords/top10", String.class);
+        var resp = testRest.getForEntity(URL_TOP10, String.class);
 
         assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.OK);
         JSONAssert.assertEquals("""
@@ -80,6 +82,42 @@ class KeywordControllerTest {
                         }
                     ]
                 }""",
+                resp.getBody(),
+                false
+        );
+    }
+
+    @Test
+    @DisplayName("블로그 검색 이후, 키워드 Top10 조회")
+    @Sql(scripts = "classpath:test-data/clean-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void testGetTop10_afterBlogSearch() throws Exception {
+        var searchUrl = "/v1/blog/documents/search?query={query}";
+        testRest.getForEntity(searchUrl, String.class, "hello1");
+        testRest.getForEntity(searchUrl, String.class, "hello2");
+        testRest.getForEntity(searchUrl, String.class, "hello1");
+
+        var resp = testRest.getForEntity(URL_TOP10, String.class);
+
+        assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.OK);
+        JSONAssert.assertEquals("""
+                {
+                    "header": {
+                        "isSuccessful": true,
+                        "resultCode": 0,
+                        "resultMessage": ""
+                    },
+                    "top10": [
+                        {
+                            "name": "hello1",
+                            "count": 2
+                        },
+                        {
+                            "name": "hello2",
+                            "count": 1
+                        }
+                    ]
+                }
+                """,
                 resp.getBody(),
                 false
         );

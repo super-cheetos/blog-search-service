@@ -1,5 +1,6 @@
 package io.supercheetos.blogsearchservice.keyword;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,7 +21,8 @@ class KeywordRepositoryTest {
     private TestEntityManager testEntityManager;
 
     @Test
-    public void testFindAll_top10() {
+    @DisplayName("검색 키워드 Top10 조회")
+    void testFindAll_top10() {
         var keywordTop10 = List.of("foo", "맥북", "world", "hello", "bar", "프로그래밍", "Java", "자바", "8", "0009");
         saveKeywords(Map.of(
                 keywordTop10.get(2), 910,

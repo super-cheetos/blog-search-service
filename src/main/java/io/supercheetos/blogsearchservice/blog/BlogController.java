@@ -1,7 +1,7 @@
 package io.supercheetos.blogsearchservice.blog;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -20,9 +20,9 @@ public class BlogController {
 
     @GetMapping("/search")
     public BlogDto.SearchResponse searchBlogDocuments(
-            @RequestParam @NotEmpty String query,
-            @RequestParam(required = false, defaultValue = "1") @Min(1) int page,
-            @RequestParam(required = false, defaultValue = "10") @Min(1) int size,
+            @RequestParam @NotBlank String query,
+            @RequestParam(required = false, defaultValue = "1") @Positive int page,
+            @RequestParam(required = false, defaultValue = "10") @Positive int size,
             @RequestParam(required = false, defaultValue = "ACCURACY") BlogSort sort
     ) {
         return BlogDto.SearchResponse.ok(service.search(query, page, size, sort));

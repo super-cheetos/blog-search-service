@@ -8,7 +8,7 @@ spring:
 
 logging:
   level:
-    root: DEBUG
+    io.supercheetos: DEBUG
 
 management:
   endpoints:

@@ -1,3 +1,4 @@
 rootProject.name = 'blog-search-service'
 include 'blog-search-api'
+include 'model'
 

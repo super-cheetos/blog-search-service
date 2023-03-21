@@ -1,0 +1,18 @@
+plugins {
+    id "java"
+}
+
+sourceCompatibility = "17"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    constraints {
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,10 @@
+plugins {
+    id "io.supercheetos.spring-app"
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    runtimeOnly 'com.h2database:h2'
+}

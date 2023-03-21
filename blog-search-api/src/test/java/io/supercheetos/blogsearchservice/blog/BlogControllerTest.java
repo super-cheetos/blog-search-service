@@ -185,7 +185,7 @@ class BlogControllerTest {
                     "header": {
                         "isSuccessful": false,
                         "resultCode": -3,
-                        "resultMessage": "query: 비어 있을 수 없습니다"
+                        "resultMessage": "query: 공백일 수 없습니다"
                     }
                 }""",
                 resp.getBody(),
@@ -205,8 +205,18 @@ class BlogControllerTest {
         assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.OK);
         JSONAssert.assertEquals("""
                 {
-                    "header":{"isSuccessful":true,"resultCode":0,"resultMessage":""},
-                    "documents":{"contents":[],"page":1,"size":10,"sort":"sort","totalCount":100}
+                    "header": {
+                        "isSuccessful": true,
+                        "resultCode": 0,
+                        "resultMessage": ""
+                    },
+                    "documents": {
+                        "contents": [],
+                        "page": 1,
+                        "size": 10,
+                        "sort": "sort",
+                        "totalCount": 100
+                    }
                 }""",
                 resp.getBody(),
                 false

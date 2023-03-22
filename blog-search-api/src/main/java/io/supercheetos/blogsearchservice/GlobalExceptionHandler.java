@@ -5,7 +5,9 @@ import io.supercheetos.blogsearchservice.blog.searcher.InvalidSearchResultExcept
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,6 +26,11 @@ public class GlobalExceptionHandler {
     private static final ResponseEntity<CommonDto.NoDataResponse> EXCEPTION_RESPONSE =
             ResponseEntity.internalServerError()
                     .body(new CommonDto.NoDataResponse(CommonDto.Header.UNKNOWN_ERROR));
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Void> handleHttpRequestMethodNotSupportedException() {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+    }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<CommonDto.NoDataResponse> handleConstraintViolationException(ConstraintViolationException e) {

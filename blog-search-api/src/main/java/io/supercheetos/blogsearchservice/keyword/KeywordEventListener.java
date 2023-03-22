@@ -11,6 +11,9 @@ public class KeywordEventListener {
 
     @EventListener(KeywordQueryEvent.class)
     public void handleKeywordQueryEvent(KeywordQueryEvent event) {
-        keywordService.increment(event.query().split(" +"));
+        var keywordNames = event.query().split(" +");
+        for (var keywordName : keywordNames) {
+            keywordService.increment(keywordName);
+        }
     }
 }

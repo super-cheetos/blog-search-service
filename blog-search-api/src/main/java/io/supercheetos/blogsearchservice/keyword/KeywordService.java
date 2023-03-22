@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Lock;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,15 +29,13 @@ public class KeywordService {
                 .toList();
     }
 
+    @Retryable
     @Transactional
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    public void increment(String[] keywordNames) {
-        for (var keywordName : keywordNames) {
-            log.debug("keywordName={}", keywordName);
-            var keyword = keywordRepository.findById(keywordName)
-                    .orElseGet(() -> new Keyword(keywordName, 0));
-            keyword.increment();
-            keywordRepository.save(keyword);
-        }
+    public void increment(String keywordName) {
+        log.debug("keywordName={}", keywordName);
+        var keyword = keywordRepository.findByName(keywordName)
+                .orElseGet(() -> new Keyword(keywordName, 0));
+        keyword.increment();
+        keywordRepository.save(keyword);
     }
 }
